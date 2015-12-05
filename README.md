@@ -73,7 +73,7 @@ Next step,
 
 ```bash
 docker build -t php-5.6 .
-docker run --name app -d -p 9000 php-5.6
+docker run --name app -d -p 9090:9000 php-5.6
 ```
 
 >See installed php-extension: `docker exec -it app php -m`
