@@ -51,8 +51,7 @@ Adding PHP-extension
 
 You can use one of two choices to install the required php-extensions:
 
-1.
-
+1. 
 ```bash
 docker exec -it app bash -c 'apt-get update && apt-get install php5-mongo && rm -rf /var/lib/apt/lists/*'
 ```
