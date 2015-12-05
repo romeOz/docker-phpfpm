@@ -17,7 +17,7 @@ Installation
 docker pull romeoz/docker-phpfpm
 ```
 
-or other versions (5.6, 5.5, 5.4 or 5.3):
+or other versions (7.0, 5.6, 5.5, 5.4 or 5.3):
 
 ```bash
 docker pull romeoz/docker-phpfpm:5.4
@@ -49,13 +49,38 @@ docker exec -it app bash
 Adding PHP-extension
 -------------------
 
-Install `php5-mongo`:
+You can use one of two choices to install the required php-extensions:
+
+1.
 
 ```bash
-sudo docker exec -it app bash -c 'apt-get update && apt-get install php5-mongo && rm -rf /var/lib/apt/lists/*'
+docker exec -it app bash -c 'apt-get update && apt-get install php5-mongo && rm -rf /var/lib/apt/lists/*'
 ```
 
->See installed php-extension: `sudo docker exec -it app php -m`
+2. Create your container on based the current. Сontents Dockerfile:
+
+```
+FROM romeoz/docker-phpfpm:5.6
+
+RUN apt-get update \
+    && apt-get install -y php5-mongo \
+    && rm -rf /var/lib/apt/lists/* 
+
+WORKDIR /var/www/app/
+
+EXPOSE 9000
+
+CMD ["/usr/sbin/php5-fpm"]
+```
+
+Next step,
+
+```bash
+docker build -t php-5.6 .
+docker run --name app -d -p 9000 php-5.6
+```
+
+>See installed php-extension: `docker exec -it app php -m`
 
 Logging
 -------------------
@@ -102,7 +127,7 @@ Create the file `/etc/logrotate.d/docker-containers` with the following text ins
 Out of the box
 -------------------
  * Ubuntu 14.04.3/12.04.5 (LTS) 
- * PHP 5.3/5.4/5.5/5.6 
+ * PHP 5.3/5.4/5.5/5.6/7.0 
 
 >Environment depends on the version of PHP.
 
