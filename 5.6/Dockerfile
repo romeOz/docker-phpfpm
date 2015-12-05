@@ -14,7 +14,6 @@ ENV PHP_RUN_DIR=/run/php \
 
 RUN	\
 	buildDeps='software-properties-common python-software-properties' \
-	# Install ansible
 	&& apt-get update \
 	&& apt-get install --no-install-recommends -y $buildDeps \
 	&& add-apt-repository -y ppa:ondrej/php5-5.6 \
