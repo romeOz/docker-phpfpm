@@ -8,7 +8,7 @@ docker build -t php-7.0 7.0/
 echo
 echo "-- Testing server is running"
 docker run --name app -d php-7.0; sleep 5
-docker exec -it app bash -c 'echo "<?php echo 2; ?>" | php -a | grep -wc 2'
+docker exec -it app bash -c 'echo "echo 2;" | php -a | grep -wc 2'
 docker exec -it app bash -c "php -v | grep -c 'PHP 7.0'"
 
 echo

@@ -18,7 +18,7 @@ RUN	\
 	&& apt-get install --no-install-recommends -y $buildDeps \
 	&& add-apt-repository -y ppa:ondrej/php-7.0 \
 	&& apt-get update \
-	&& apt-get install -y curl php7.0-fpm php7.0-cli php7.0-intl php7.0-json php7.0-curl php7.0-gd php7.0-pgsql php7.0-mysql \
+	&& apt-get install -y curl php7.0-fpm php7.0-cli php7.0-readline php7.0-intl php7.0-json php7.0-curl php7.0-gd php7.0-pgsql php7.0-mysql \
 	&& mkdir -p ${PHP_LOG_DIR} ${PHP_RUN_DIR} \
 	# Cleaning
 	&& apt-get purge -y --auto-remove $buildDeps \
