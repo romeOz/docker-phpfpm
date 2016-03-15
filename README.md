@@ -122,7 +122,7 @@ Create the file `/etc/logrotate.d/docker-containers` with the following text ins
 
 Out of the box
 -------------------
- * Ubuntu 14.04.3/12.04.5 (LTS) 
+ * Ubuntu 14.04/12.04 (LTS) 
  * PHP 5.3/5.4/5.5/5.6/7.0 
 
 >Environment depends on the version of PHP.
