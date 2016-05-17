@@ -15,8 +15,10 @@ ENV PHP_RUN_DIR=/run/php \
 RUN	\
 	apt-get update \
 	&& apt-get install --no-install-recommends -y sudo \
-	&& apt-get install -y curl php5-fpm php5-cli php-apc php5-intl php5-json php5-curl php5-mcrypt php5-gd php5-pgsql php5-mysql php-pear \
+	&& apt-get install -y curl php5-fpm php5-cli php-apc php5-intl php5-json php5-curl php5-mcrypt php5-gd php5-pgsql php5-mysql \
 	&& echo "apc.enable_cli=1" >> /etc/php5/cli/conf.d/apc.ini \
+	# Install composer
+	&& curl -sS https://getcomposer.org/installer | php -- --version=1.1.0 --install-dir=/usr/local/bin --filename=composer \
 	&& mkdir -p ${PHP_LOG_DIR} ${PHP_RUN_DIR} \
 	# Cleaning
 	&& apt-get autoremove -y && apt-get clean \

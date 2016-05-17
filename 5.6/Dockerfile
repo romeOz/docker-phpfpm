@@ -9,17 +9,19 @@ ENV LANG=${OS_LOCALE} \
 
 ENV PHP_RUN_DIR=/run/php \
 	PHP_LOG_DIR=/var/log/php \
-	PHP_CONF=/etc/php5/fpm/php-fpm.conf \
-	PHP_DATA_DIR=/var/lib/php5
+	PHP_CONF=/etc/php/5.6/fpm/php-fpm.conf \
+	PHP_DATA_DIR=/var/lib/php
 
 RUN	\
 	buildDeps='software-properties-common python-software-properties' \
 	&& apt-get update \
 	&& apt-get install --no-install-recommends -y $buildDeps \
-	&& add-apt-repository -y ppa:ondrej/php5-5.6 \
+	&& add-apt-repository -y ppa:ondrej/php \
 	&& apt-get update \
-	&& apt-get install -y curl php5-fpm php5-cli php5-intl php5-json php5-curl php5-mcrypt php5-gd php5-pgsql php5-mysql php-pear \
-	&& php5enmod mcrypt \
+	&& apt-get install -y curl php5.6-fpm php5.6-cli php5.6-readline php5.6-intl php5.6-json php5.6-curl php5.6-mcrypt php5.6-gd php5.6-pgsql php5.6-mysql \
+	&& phpenmod mcrypt \
+	# Install composer
+	&& curl -sS https://getcomposer.org/installer | php -- --version=1.1.0 --install-dir=/usr/local/bin --filename=composer \
 	&& mkdir -p ${PHP_LOG_DIR} ${PHP_RUN_DIR} \
 	# Cleaning
 	&& apt-get purge -y --auto-remove $buildDeps \
@@ -27,8 +29,8 @@ RUN	\
 	&& rm -rf /var/lib/apt/lists/*
 
 COPY ./configs/php-fpm.conf ${PHP_CONF}
-COPY ./configs/www.conf /etc/php5/fpm/pool.d/www.conf
-COPY ./configs/php.ini /etc/php5/fpm/conf.d/custom.ini
+COPY ./configs/www.conf /etc/php/5.6/fpm/pool.d/www.conf
+COPY ./configs/php.ini /etc/php/5.6/fpm/conf.d/custom.ini
 
 RUN sed -i "s~PHP_RUN_DIR~${PHP_RUN_DIR}~g" ${PHP_CONF} \
 	&& sed -i "s~PHP_LOG_DIR~${PHP_LOG_DIR}~g" ${PHP_CONF} \
@@ -40,4 +42,4 @@ EXPOSE 9000
 
 # PHP_DATA_DIR store sessions
 VOLUME ["${PHP_RUN_DIR}", "${PHP_DATA_DIR}"]
-CMD ["/usr/sbin/php5-fpm"]
+CMD ["/usr/sbin/php-fpm5.6"]
