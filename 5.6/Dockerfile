@@ -1,11 +1,12 @@
-FROM ubuntu:trusty
+FROM ubuntu:xenial
 MAINTAINER romeOz <serggalka@gmail.com>
 
 ENV OS_LOCALE="en_US.UTF-8"
 RUN locale-gen ${OS_LOCALE}
 ENV LANG=${OS_LOCALE} \
 	LANGUAGE=en_US:en \
-	LC_ALL=${OS_LOCALE}
+	LC_ALL=${OS_LOCALE} \
+    DEBIAN_FRONTEND=noninteractive
 
 ENV PHP_RUN_DIR=/run/php \
 	PHP_LOG_DIR=/var/log/php \
