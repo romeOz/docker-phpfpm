@@ -34,7 +34,7 @@ docker build -t="$USER/docker-phpfpm" .
 Quick Start
 -------------------
 
-Run the application image:
+Run the application container:
 
 ```bash
 docker run --name app -d -p 9000:9000 romeoz/docker-phpfpm
@@ -131,4 +131,4 @@ Out of the box
 License
 -------------------
 
-PHP-FPM container image is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+PHP-FPM docker image is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
