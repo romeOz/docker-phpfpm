@@ -51,7 +51,7 @@ Adding PHP-extension
 
 You can use one of two choices to install the required php-extensions:
 
-1. `docker exec -it app bash -c 'apt-get update && apt-get install php5-mongo && rm -rf /var/lib/apt/lists/*'`
+1. `docker exec -it app bash -c 'apt-get update && apt-get install php-mongo && rm -rf /var/lib/apt/lists/*'`
 
 2. Create your container on based the current. Сontents Dockerfile:
 
@@ -122,8 +122,8 @@ Create the file `/etc/logrotate.d/docker-containers` with the following text ins
 
 Out of the box
 -------------------
- * Ubuntu 12.04/14.04/16.04 LTS 
- * PHP 5.3/5.4/5.5/5.6/7.0
+ * Ubuntu 12.04, 14.04 or 16.04 LTS 
+ * PHP 5.3, 5.4, 5.5, 5.6 or 7.0
  * Composer (package manager)
 
 >Environment depends on the version of PHP.
