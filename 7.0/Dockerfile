@@ -10,31 +10,33 @@ ENV LANG=${OS_LOCALE} \
 
 ENV PHP_RUN_DIR=/run/php \
 	PHP_LOG_DIR=/var/log/php \
-	PHP_CONF=/etc/php/7.0/fpm/php-fpm.conf \
+	PHP_CONF_DIR=/etc/php/7.0 \
 	PHP_DATA_DIR=/var/lib/php
 
 RUN	\
 	buildDeps='software-properties-common python-software-properties' \
 	&& apt-get update \
+	# Install common libraries
 	&& apt-get install --no-install-recommends -y $buildDeps \
 	&& add-apt-repository -y ppa:ondrej/php \
 	&& apt-get update \
-	&& apt-get install -y curl php7.0-fpm php7.0-cli php7.0-readline php7.0-intl php7.0-json php7.0-curl php7.0-mcrypt php7.0-gd php7.0-pgsql php7.0-mysql \
+	# Install PHP libraries
+	&& apt-get install -y curl php7.0-fpm php7.0-cli php7.0-readline php7.0-intl php7.0-json php7.0-xml php7.0-curl php7.0-mcrypt php7.0-gd php7.0-pgsql php7.0-mysql php-pear \
 	&& phpenmod mcrypt \
 	# Install composer
-	&& curl -sS https://getcomposer.org/installer | php -- --version=1.1.0 --install-dir=/usr/local/bin --filename=composer \
+	&& curl -sS https://getcomposer.org/installer | php -- --version=1.1.1 --install-dir=/usr/local/bin --filename=composer \
 	&& mkdir -p ${PHP_LOG_DIR} ${PHP_RUN_DIR} \
 	# Cleaning
 	&& apt-get purge -y --auto-remove $buildDeps \
 	&& apt-get autoremove -y && apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 
-COPY ./configs/php-fpm.conf ${PHP_CONF}
-COPY ./configs/www.conf /etc/php/7.0/fpm/pool.d/www.conf
-COPY ./configs/php.ini /etc/php/7.0/fpm/conf.d/custom.ini
+COPY ./configs/php-fpm.conf ${PHP_CONF_DIR}/fpm/php-fpm.conf
+COPY ./configs/www.conf ${PHP_CONF_DIR}/fpm/pool.d/www.conf
+COPY ./configs/php.ini ${PHP_CONF_DIR}/fpm/conf.d/custom.ini
 
-RUN sed -i "s~PHP_RUN_DIR~${PHP_RUN_DIR}~g" ${PHP_CONF} \
-	&& sed -i "s~PHP_LOG_DIR~${PHP_LOG_DIR}~g" ${PHP_CONF} \
+RUN sed -i "s~PHP_RUN_DIR~${PHP_RUN_DIR}~g" ${PHP_CONF_DIR}/fpm/php-fpm.conf \
+	&& sed -i "s~PHP_LOG_DIR~${PHP_LOG_DIR}~g" ${PHP_CONF_DIR}/fpm/php-fpm.conf \
 	&& chown www-data:www-data ${PHP_DATA_DIR} -Rf
 
 WORKDIR /var/www

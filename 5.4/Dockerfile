@@ -15,14 +15,16 @@ ENV PHP_RUN_DIR=/run/php \
 RUN	\
 	buildDeps='software-properties-common python-software-properties' \
 	&& apt-get update \
-	&& apt-get install --no-install-recommends -y $buildDeps sudo \
+	# Install common libraries
+	&& apt-get install --no-install-recommends -y $buildDeps \
 	&& add-apt-repository -y ppa:ondrej/php5-oldstable \
 	&& apt-get update \
-	&& apt-get install -y curl php5-fpm php5-cli php-apc php5-intl php5-json php5-curl php5-mcrypt php5-gd php5-pgsql php5-mysql \
+	# Install PHP libraries
+	&& apt-get install -y curl php5-fpm php5-cli php-apc php5-intl php5-json php5-curl php5-mcrypt php5-gd php5-pgsql php5-mysql php-pear \
 	&& php5enmod mcrypt \
 	&& echo "apc.enable_cli=1" >> /etc/php5/mods-available/apc.ini \
 	# Install composer
-	&& curl -sS https://getcomposer.org/installer | php -- --version=1.1.0 --install-dir=/usr/local/bin --filename=composer \
+	&& curl -sS https://getcomposer.org/installer | php -- --version=1.1.1 --install-dir=/usr/local/bin --filename=composer \
 	&& mkdir -p ${PHP_LOG_DIR} ${PHP_RUN_DIR} \
 	# Cleaning
 	&& apt-get purge -y --auto-remove $buildDeps \
