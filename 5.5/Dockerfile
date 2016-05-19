@@ -21,7 +21,7 @@ RUN	\
 	&& add-apt-repository -y ppa:ondrej/php \
 	&& apt-get update \
 	# Install PHP libraries
-	&& apt-get install -y curl php5.5-fpm php5.5-cli php5.5-intl php5.5-mbstring php5.5-xml php5.5-json php5.5-curl php5.5-mcrypt php5.5-gd php5.5-pgsql php5.5-mysql php-pear \
+	&& apt-get install -y curl php5.5-fpm php5.5-cli php5.5-intl php5.5-zip php5.5-mbstring php5.5-xml php5.5-json php5.5-curl php5.5-mcrypt php5.5-gd php5.5-pgsql php5.5-mysql php-pear \
 	&& phpenmod mcrypt \
 	# Install composer
 	&& curl -sS https://getcomposer.org/installer | php -- --version=1.1.1 --install-dir=/usr/local/bin --filename=composer \
