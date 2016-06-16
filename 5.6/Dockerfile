@@ -10,7 +10,7 @@ ENV LANG=${OS_LOCALE} \
 
 ENV PHP_RUN_DIR=/run/php \
 	PHP_LOG_DIR=/var/log/php \
-	PHP_CONF=/etc/php/5.6 \
+	PHP_CONF_DIR=/etc/php/5.6 \
 	PHP_DATA_DIR=/var/lib/php
 
 RUN	\
@@ -24,19 +24,19 @@ RUN	\
 	&& apt-get install -y curl php5.6-fpm php5.6-cli php5.6-readline php5.6-mbstring php5.6-zip php5.6-intl php5.6-xml php5.6-json php5.6-curl php5.6-mcrypt php5.6-gd php5.6-pgsql php5.6-mysql php-pear \
 	&& phpenmod mcrypt \
 	# Install composer
-	&& curl -sS https://getcomposer.org/installer | php -- --version=1.1.1 --install-dir=/usr/local/bin --filename=composer \
+	&& curl -sS https://getcomposer.org/installer | php -- --version=1.1.2 --install-dir=/usr/local/bin --filename=composer \
 	&& mkdir -p ${PHP_LOG_DIR} ${PHP_RUN_DIR} \
 	# Cleaning
 	&& apt-get purge -y --auto-remove $buildDeps \
 	&& apt-get autoremove -y && apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 
-COPY ./configs/php-fpm.conf ${PHP_CONF}/fpm/php-fpm.conf
-COPY ./configs/www.conf ${PHP_CONF}/fpm/pool.d/www.conf
-COPY ./configs/php.ini ${PHP_CONF}/fpm/conf.d/custom.ini
+COPY ./configs/php-fpm.conf ${PHP_CONF_DIR}/fpm/php-fpm.conf
+COPY ./configs/www.conf ${PHP_CONF_DIR}/fpm/pool.d/www.conf
+COPY ./configs/php.ini ${PHP_CONF_DIR}/fpm/conf.d/custom.ini
 
-RUN sed -i "s~PHP_RUN_DIR~${PHP_RUN_DIR}~g" ${PHP_CONF}/fpm/php-fpm.conf \
-	&& sed -i "s~PHP_LOG_DIR~${PHP_LOG_DIR}~g" ${PHP_CONF}/fpm/php-fpm.conf \
+RUN sed -i "s~PHP_RUN_DIR~${PHP_RUN_DIR}~g" ${PHP_CONF_DIR}/fpm/php-fpm.conf \
+	&& sed -i "s~PHP_LOG_DIR~${PHP_LOG_DIR}~g" ${PHP_CONF_DIR}/fpm/php-fpm.conf \
 	&& chown www-data:www-data ${PHP_DATA_DIR} -Rf
 
 WORKDIR /var/www
