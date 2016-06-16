@@ -4,19 +4,23 @@ MAINTAINER romeOz <serggalka@gmail.com>
 ENV PHP_CONF_DIR=/etc/php5/
 
 RUN \
-    VERSION_PECL_COUCHBASE="2.1.0" && BUILD_DEPS='php5-dev wget make libtool locate' \
+    VERSION_PECL_COUCHBASE="2.1.0" && BUILD_DEPS='php5-dev wget make libtool locate pkg-config' \
     && apt-get update \
     && apt-get install -y ${BUILD_DEPS} \
     && echo "deb http://packages.couchbase.com/ubuntu precise precise/main" | tee -a /etc/apt/sources.list.d/couchbase.list \
     && wget -O- http://packages.couchbase.com/ubuntu/couchbase.key | apt-key add - \
     && apt-get update \
-    && apt-get install -y libcouchbase2-libevent libcouchbase-dev php5-memcache php5-memcached \
+    && apt-get install -y libcouchbase2-libevent libcouchbase-dev libsasl2-dev libmemcached-dev php5-memcache \
     && pecl channel-update pecl.php.net \
 	# Install xdebug
 	&& echo -e "\nInstall xdebug extension\n" \
 	&& pecl install -f xdebug-2.4.0 \
 	&& PATH_XDEBUG=$(updatedb && locate xdebug.so) \
 	&& echo "zend_extension = ${PATH_XDEBUG}" >> ${PHP_CONF_DIR}/fpm/conf.d/xdebug.ini \
+	# Install memcached
+	&& echo -e "\nInstall memcached extension\n" \
+	&& printf "no --disable-memcached-sasl" | pecl install memcached \
+	&& echo "extension = memcached.so" > ${PHP_CONF_DIR}/fpm/conf.d/memcached.ini \
 	# Install mongo
     && echo "\nInstall mongo extension\n" \
     && printf "\n" | pecl install -f mongo \
