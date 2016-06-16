@@ -22,7 +22,7 @@ RUN \
 	&& echo "extension = apcu.so" >> ${PHP_CONF_DIR}/fpm/conf.d/apcu.ini \
 	&& echo "extension = apcu.so\napc.enable_cli=1" >> ${PHP_CONF_DIR}/cli/conf.d/apcu.ini \
     && composer global require "phpunit/phpunit:^4.7.0" \
-    && echo 'include_path = ".:/usr/share/php:/root/.composer/vendor/phpunit"' > ${PHP_CONF_DIR}/cli/conf.d/custom.ini \
+    && echo -e '\ninclude_path = ".:/usr/share/php:/root/.composer/vendor/phpunit"' >> ${PHP_CONF_DIR}/cli/conf.d/custom.ini \
     && ln -s /root/.composer/vendor/bin/phpunit /usr/bin/phpunit \
 	# Cleaning
     && apt-get purge -y --auto-remove ${BUILD_DEPS} \
