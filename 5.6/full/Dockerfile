@@ -10,7 +10,7 @@ RUN \
     && echo "deb http://packages.couchbase.com/ubuntu trusty trusty/main" | tee -a /etc/apt/sources.list.d/couchbase.list \
     && wget -O- http://packages.couchbase.com/ubuntu/couchbase.key | apt-key add - \
     && apt-get update \
-    && apt-get install -y libcouchbase2-libevent libcouchbase-dev php-xdebug php-redis php-memcache php-memcached php-mongo \
+    && apt-get install -y libcouchbase2-libevent libcouchbase-dev php-xdebug php-redis php-memcache php-memcached php-mongo php5.6-bcmath \
     && pecl channel-update pecl.php.net \
 	# Install couchbase
 	&& echo "\nInstall couchbase extension\n" \
