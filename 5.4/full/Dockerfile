@@ -33,7 +33,7 @@ RUN \
 	&& echo "extension = redis.so" > ${PHP_CONF_DIR}/cli/conf.d/redis.ini \
 	# Install couchbase
 	&& echo "\nInstall couchbase extension\n" \
-	&& pecl install -f couchbase-${VERSION_PECL_COUCHBASE} \
+	&& pecl install -f couchbase \
 	&& echo "extension = couchbase.so" > ${PHP_CONF_DIR}/fpm/conf.d/couchbase.ini \
 	&& echo "extension = couchbase.so" > ${PHP_CONF_DIR}/cli/conf.d/couchbase.ini \
     && composer global require "phpunit/phpunit:^4.7.0" \
