@@ -24,7 +24,7 @@ RUN	\
 	&& apt-get install -y curl php7.0-fpm php7.0-cli php7.0-readline php7.0-mbstring php7.0-zip php7.0-intl php7.0-json php7.0-xml php7.0-curl php7.0-mcrypt php7.0-gd php7.0-pgsql php7.0-mysql php-pear \
 	&& phpenmod mcrypt \
 	# Install composer
-	&& curl -sS https://getcomposer.org/installer | php -- --version=1.2.1 --install-dir=/usr/local/bin --filename=composer \
+	&& curl -sS https://getcomposer.org/installer | php -- --version=1.2.3 --install-dir=/usr/local/bin --filename=composer \
 	&& mkdir -p ${PHP_LOG_DIR} ${PHP_RUN_DIR} \
 	# Cleaning
 	&& apt-get purge -y --auto-remove $buildDeps \
