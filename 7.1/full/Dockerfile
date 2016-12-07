@@ -22,7 +22,7 @@ RUN \
     && echo -e '\ninclude_path = ".:/usr/share/php:/root/.composer/vendor/phpunit"' >> ${PHP_CONF_DIR}/cli/conf.d/custom.ini \
     && ln -s /root/.composer/vendor/bin/phpunit /usr/bin/phpunit \
 	# Cleaning
-    && apt-get purge -y --auto-remove ${BUILD_DEPS} php-apcu-bc \
+    && apt-get purge -y --auto-remove ${BUILD_DEPS} \
 	&& apt-get autoremove -y && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
