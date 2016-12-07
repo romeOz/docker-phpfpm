@@ -12,21 +12,21 @@ RUN \
     && apt-get update \
     && apt-get install -y libcouchbase2-libevent libcouchbase-dev php-xdebug php-redis php-memcache php-memcached php-mongo php5.6-bcmath \
     && pecl channel-update pecl.php.net \
-	# Install couchbase
-	&& echo "\nInstall couchbase extension\n" \
-	&& pecl install -f couchbase \
-	&& echo "extension = couchbase.so" >> ${PHP_CONF_DIR}/fpm/conf.d/couchbase.ini \
-	&& echo "extension = couchbase.so" >> ${PHP_CONF_DIR}/cli/conf.d/couchbase.ini \
-	# Install APC
-	&& printf "\n" | pecl install -f apcu-4.0.11 \
-	&& echo "extension = apcu.so" >> ${PHP_CONF_DIR}/fpm/conf.d/apcu.ini \
-	&& echo "extension = apcu.so\napc.enable_cli=1" >> ${PHP_CONF_DIR}/cli/conf.d/apcu.ini \
+    # Install couchbase
+    && echo "\nInstall couchbase extension\n" \
+    && pecl install -f couchbase \
+    && echo "extension = couchbase.so" >> ${PHP_CONF_DIR}/fpm/conf.d/couchbase.ini \
+    && echo "extension = couchbase.so" >> ${PHP_CONF_DIR}/cli/conf.d/couchbase.ini \
+    # Install APC
+    && printf "\n" | pecl install -f apcu-4.0.11 \
+    && echo "extension = apcu.so" >> ${PHP_CONF_DIR}/fpm/conf.d/apcu.ini \
+    && echo "extension = apcu.so\napc.enable_cli=1" >> ${PHP_CONF_DIR}/cli/conf.d/apcu.ini \
     && composer global require "phpunit/phpunit:^4.7.0" \
     && echo -e '\ninclude_path = ".:/usr/share/php:/root/.composer/vendor/phpunit"' >> ${PHP_CONF_DIR}/cli/conf.d/custom.ini \
     && ln -s /root/.composer/vendor/bin/phpunit /usr/bin/phpunit \
-	# Cleaning
+    # Cleaning
     && apt-get purge -y --auto-remove ${BUILD_DEPS} \
-	&& apt-get autoremove -y && apt-get clean \
+    && apt-get autoremove -y && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 ENV PATH /root/.composer/vendor/bin:$PATH

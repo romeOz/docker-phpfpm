@@ -13,17 +13,17 @@ RUN \
     && apt-get install -y libcouchbase2-libevent libcouchbase-dev php-xdebug php-apcu php-redis php-memcache php-memcached php-mongodb php7.1-bcmath \
     && echo "apc.enable_cli=1" >> ${PHP_CONF_DIR}/mods-available/apcu.ini \
     && pecl channel-update pecl.php.net \
-	# Install couchbase
-	&& echo "\nInstall couchbase extension\n" \
-	&& pecl install -f couchbase \
-	&& echo "extension = couchbase.so" >> ${PHP_CONF_DIR}/fpm/conf.d/couchbase.ini \
-	&& echo "extension = couchbase.so" >> ${PHP_CONF_DIR}/cli/conf.d/couchbase.ini \
+    # Install couchbase
+    && echo "\nInstall couchbase extension\n" \
+    && pecl install -f couchbase \
+    && echo "extension = couchbase.so" >> ${PHP_CONF_DIR}/fpm/conf.d/couchbase.ini \
+    && echo "extension = couchbase.so" >> ${PHP_CONF_DIR}/cli/conf.d/couchbase.ini \
     && composer global require "phpunit/phpunit:^5.4.0" \
     && echo -e '\ninclude_path = ".:/usr/share/php:/root/.composer/vendor/phpunit"' >> ${PHP_CONF_DIR}/cli/conf.d/custom.ini \
     && ln -s /root/.composer/vendor/bin/phpunit /usr/bin/phpunit \
-	# Cleaning
+    # Cleaning
     && apt-get purge -y --auto-remove ${BUILD_DEPS} \
-	&& apt-get autoremove -y && apt-get clean \
+    && apt-get autoremove -y && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 ENV PATH /root/.composer/vendor/bin:$PATH
