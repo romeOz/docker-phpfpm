@@ -14,6 +14,10 @@ RUN \
     && pecl channel-update pecl.php.net \
     # Install couchbase
     && echo "\nInstall couchbase extension\n" \
+    && apt-get install -y re2c \
+    && pecl install -f pcs \
+    && echo "extension = pcs.so" >> ${PHP_CONF_DIR}/fpm/conf.d/pcs.ini \
+    && echo "extension = pcs.so" >> ${PHP_CONF_DIR}/cli/conf.d/pcs.ini \
     && pecl install -f couchbase \
     && echo "extension = couchbase.so" >> ${PHP_CONF_DIR}/fpm/conf.d/couchbase.ini \
     && echo "extension = couchbase.so" >> ${PHP_CONF_DIR}/cli/conf.d/couchbase.ini \
