@@ -22,7 +22,7 @@ RUN \
     && pecl install -f couchbase \
     && echo "extension = couchbase.so" >> ${PHP_CONF_DIR}/fpm/conf.d/couchbase.ini \
     && echo "extension = couchbase.so" >> ${PHP_CONF_DIR}/cli/conf.d/couchbase.ini \
-    && composer global require "phpunit/phpunit:^5.4.0" \
+    && composer global require "phpunit/phpunit:^6.0.0" \
     && echo -e '\ninclude_path = ".:/usr/share/php:/root/.composer/vendor/phpunit"' >> ${PHP_CONF_DIR}/cli/conf.d/custom.ini \
     && ln -s /root/.composer/vendor/bin/phpunit /usr/bin/phpunit \
     # Cleaning
