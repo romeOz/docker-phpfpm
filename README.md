@@ -1,3 +1,5 @@
+[![Docker Pulls](https://img.shields.io/docker/pulls/romeoz/docker-phpfpm.svg)](https://hub.docker.com/r/romeoz/docker-phpfpm/)
+
 Table of Contents
 -------------------
 
