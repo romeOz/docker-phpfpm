@@ -18,7 +18,7 @@ RUN \
     && apt-get install -y curl php5-fpm php5-cli php-apc php5-intl php5-json php5-curl php5-mcrypt php5-gd php5-pgsql php5-mysql php-pear \
     && echo "apc.enable_cli=1" >> ${PHP_CONF_DIR}/cli/conf.d/apc.ini \
     # Install composer
-    && curl -sS https://getcomposer.org/installer | php -- --version=1.3.2 --install-dir=/usr/local/bin --filename=composer \
+    && curl -sS https://getcomposer.org/installer | php -- --version=1.4.1 --install-dir=/usr/local/bin --filename=composer \
     && mkdir -p ${PHP_LOG_DIR} ${PHP_RUN_DIR} \
     # Cleaning
     && apt-get autoremove -y && apt-get clean \
