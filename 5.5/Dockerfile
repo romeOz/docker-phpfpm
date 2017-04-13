@@ -2,7 +2,7 @@ FROM ubuntu:xenial
 MAINTAINER romeOz <serggalka@gmail.com>
 
 ENV OS_LOCALE="en_US.UTF-8"
-RUN locale-gen ${OS_LOCALE}
+RUN apt-get update && apt-get install -y locales && locale-gen ${OS_LOCALE}
 ENV LANG=${OS_LOCALE} \
     LANGUAGE=en_US:en \
     LC_ALL=${OS_LOCALE} \
@@ -15,7 +15,6 @@ ENV PHP_RUN_DIR=/run/php \
 
 RUN \
     buildDeps='software-properties-common python-software-properties' \
-    && apt-get update \
     # Install common libraries
     && apt-get install --no-install-recommends -y $buildDeps \
     && add-apt-repository -y ppa:ondrej/php \
@@ -27,7 +26,7 @@ RUN \
     && curl -sS https://getcomposer.org/installer | php -- --version=1.3.2 --install-dir=/usr/local/bin --filename=composer \
     && mkdir -p ${PHP_LOG_DIR} ${PHP_RUN_DIR} \
     # Cleaning
-    && apt-get purge -y --auto-remove $buildDeps \
+    && apt-get purge -y --auto-remove $buildDeps locales \
     && apt-get autoremove -y && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
