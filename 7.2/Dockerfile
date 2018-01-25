@@ -4,13 +4,18 @@ MAINTAINER romeOz <serggalka@gmail.com>
 ENV OS_LOCALE="en_US.UTF-8"
 RUN apt-get update \
     && apt-get install -y locales \
-    && echo "LC_ALL=${OS_LOCALE}" >> /etc/environment \
-    && echo "${OS_LOCALE} UTF-8" >> /etc/locale.gen \
-    && echo "LANG=${OS_LOCALE}" > /etc/locale.conf \
+    && echo "LANGUAGE=${OS_LOCALE}" > /etc/default/locale \
+    && echo "LC_ALL=${OS_LOCALE}" >> /etc/default/locale \
+    && echo "LANG=${OS_LOCALE}" >> /etc/default/locale \
+    && echo "LC_TYPE=${OS_LOCALE}" >> /etc/default/locale \
+#    && echo "LC_ALL=${OS_LOCALE}" >> /etc/environment \
+#    && echo "${OS_LOCALE} UTF-8" >> /etc/locale.gen \
+#    && echo "LANG=${OS_LOCALE}" > /etc/locale.conf \
     && locale-gen ${OS_LOCALE}
+
 ENV LANG=${OS_LOCALE} \
-    LANGUAGE=en_US:en \
-    # LC_ALL=${OS_LOCALE} \
+#    LANGUAGE=en_US:en \
+#    LC_ALL=${OS_LOCALE} \
     DEBIAN_FRONTEND=noninteractive
 
 ENV PHP_RUN_DIR=/run/php \
@@ -20,6 +25,7 @@ ENV PHP_RUN_DIR=/run/php \
 
 RUN \
     buildDeps='software-properties-common python-software-properties' \
+    && dpkg-reconfigure locales \
     # Install common libraries
     && apt-get install --no-install-recommends -y $buildDeps \
     && add-apt-repository -y ppa:ondrej/php \
