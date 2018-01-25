@@ -19,7 +19,7 @@ Installation
 docker pull romeoz/docker-phpfpm
 ```
 
-or other versions (7.1, 7.0, 5.6, 5.5, 5.4 or 5.3):
+or other versions (7.2, 7.1, 7.0, 5.6, 5.5, 5.4 or 5.3):
 
 ```bash
 docker pull romeoz/docker-phpfpm:5.5
@@ -58,7 +58,7 @@ You can use one of two choices to install the required php-extensions:
 2. Create your container on based the current. Сontents Dockerfile:
 
 ```
-FROM romeoz/docker-phpfpm:5.5
+FROM romeoz/docker-phpfpm:5.6
 
 RUN apt-get update \
     && apt-get install -y php-mongo \
@@ -68,7 +68,7 @@ WORKDIR /var/www/app/
 
 EXPOSE 9000
 
-CMD ["/usr/sbin/php-fpm5.5"]
+CMD ["/usr/sbin/php-fpm5.6"]
 ```
 
 Next step,
@@ -124,8 +124,8 @@ Create the file `/etc/logrotate.d/docker-containers` with the following text ins
 
 Out of the box
 -------------------
- * Ubuntu 12.04, 14.04 or 16.04 LTS 
- * PHP 5.3, 5.4, 5.5, 5.6, 7.0 or 7.1
+ * Ubuntu 12.04, 14.04 or 16.04 LTS
+ * PHP 5.3, 5.4, 5.5, 5.6, 7.0, 7.1 or 7.2
  * Composer (package manager)
 
 >Environment depends on the version of PHP.
