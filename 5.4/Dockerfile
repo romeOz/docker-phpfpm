@@ -5,7 +5,8 @@ ENV OS_LOCALE="en_US.UTF-8"
 RUN locale-gen ${OS_LOCALE}
 ENV LANG=${OS_LOCALE} \
     LANGUAGE=en_US:en \
-    LC_ALL=${OS_LOCALE}
+    LC_ALL=${OS_LOCALE} \
+    DEBIAN_FRONTEND=noninteractive
 
 ENV PHP_RUN_DIR=/run/php \
     PHP_LOG_DIR=/var/log/php \
@@ -17,7 +18,7 @@ RUN \
     && apt-get update \
     # Install common libraries
     && apt-get install --no-install-recommends -y $buildDeps \
-    && add-apt-repository -y ppa:ondrej/php5-oldstable \
+    && add-apt-repository -y ppa:jukito-gmail/php5.4 \
     && apt-get update \
     # Install PHP libraries
     && apt-get install -y curl php5-fpm php5-cli php-apc php5-intl php5-json php5-curl php5-mcrypt php5-gd php5-pgsql php5-mysql php-pear \

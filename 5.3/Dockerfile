@@ -18,6 +18,7 @@ RUN \
     && apt-get update \
     # Install common libraries
     && apt-get install --no-install-recommends -y $buildDeps \
+    # Note: PHP 5.3.29 Trusty ppa:hentenaar/php
     && add-apt-repository ppa:rip84/php5 \
     && apt-get update \
     # Install PHP libraries
