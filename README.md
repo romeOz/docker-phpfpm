@@ -80,6 +80,8 @@ docker run --name app -d -p 9090:9000 php-5.6
 
 >See installed php-extension: `docker exec -it app php -m`
 
+>PHP-extension "Mcrypt" was REMOVED in PHP 7.2. Use [Sodium](http://php.net/manual/en/book.sodium.php) or [OpenSSL](http://php.net/manual/en/book.openssl.php)
+
 Logging
 -------------------
 
