@@ -4,7 +4,7 @@ MAINTAINER romeOz <serggalka@gmail.com>
 ENV OS_LOCALE="en_US.UTF-8"
 RUN apt-get update && apt-get install -y locales && locale-gen ${OS_LOCALE}
 ENV LANG=${OS_LOCALE} \
-    LANGUAGE=en_US:en \
+    LANGUAGE=${OS_LOCALE} \
     LC_ALL=${OS_LOCALE} \
     DEBIAN_FRONTEND=noninteractive
 
@@ -14,9 +14,10 @@ ENV PHP_RUN_DIR=/run/php \
     PHP_DATA_DIR=/var/lib/php
 
 RUN \
-    buildDeps='software-properties-common python-software-properties' \
+    BUILD_DEPS='software-properties-common python-software-properties' \
+    && dpkg-reconfigure locales \    
     # Install common libraries
-    && apt-get install --no-install-recommends -y $buildDeps \
+    && apt-get install --no-install-recommends -y $BUILD_DEPS \
     && add-apt-repository -y ppa:ondrej/php \
     && apt-get update \
     # Install PHP libraries
@@ -26,7 +27,7 @@ RUN \
     && curl -sS https://getcomposer.org/installer | php -- --version=1.6.4 --install-dir=/usr/local/bin --filename=composer \
     && mkdir -p ${PHP_LOG_DIR} ${PHP_RUN_DIR} \
     # Cleaning
-    && apt-get purge -y --auto-remove $buildDeps locales \
+    && apt-get purge -y --auto-remove $BUILD_DEPS \
     && apt-get autoremove -y && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

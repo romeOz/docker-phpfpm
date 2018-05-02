@@ -18,6 +18,7 @@ docker rmi -f php-7.2
 
 
 echo
+echo
 echo "-- Building PHP 7.1 image"
 docker build -t php-7.1 7.1/
 

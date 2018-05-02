@@ -4,7 +4,7 @@ MAINTAINER romeOz <serggalka@gmail.com>
 ENV OS_LOCALE="en_US.UTF-8"
 RUN locale-gen ${OS_LOCALE}
 ENV LANG=${OS_LOCALE} \
-    LANGUAGE=en_US:en \
+    LANGUAGE=${OS_LOCALE} \
     LC_ALL=${OS_LOCALE} \
     DEBIAN_FRONTEND=noninteractive
 
@@ -14,10 +14,10 @@ ENV PHP_RUN_DIR=/run/php \
     PHP_DATA_DIR=/var/lib/php5
 
 RUN \
-    buildDeps='software-properties-common python-software-properties' \
+    BUILD_DEPS='software-properties-common python-software-properties' \
     && apt-get update \
     # Install common libraries
-    && apt-get install --no-install-recommends -y $buildDeps \
+    && apt-get install --no-install-recommends -y $BUILD_DEPS \
     # Note: PHP 5.3.29 Trusty ppa:hentenaar/php
     && add-apt-repository ppa:rip84/php5 \
     && apt-get update \
@@ -28,7 +28,7 @@ RUN \
     && curl -sS https://getcomposer.org/installer | php -- --version=1.4.3 --install-dir=/usr/local/bin --filename=composer \
     && mkdir -p ${PHP_LOG_DIR} ${PHP_RUN_DIR} \
     # Cleaning
-    && apt-get purge -y --auto-remove $buildDeps \
+    && apt-get purge -y --auto-remove $BUILD_DEPS \
     && apt-get autoremove -y && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
