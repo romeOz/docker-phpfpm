@@ -4,7 +4,7 @@ MAINTAINER romeOz <serggalka@gmail.com>
 ENV PHP_CONF_DIR=/etc/php/7.2
 
 RUN \
-    VERSION_PECL_COUCHBASE="2.2.0beta3" && BUILD_DEPS='php7.2-dev wget' \
+    BUILD_DEPS='php7.2-dev wget' \
     && apt-get update \
     && apt-get install -y ${BUILD_DEPS} \
     && echo "deb http://packages.couchbase.com/ubuntu trusty trusty/main" | tee -a /etc/apt/sources.list.d/couchbase.list \

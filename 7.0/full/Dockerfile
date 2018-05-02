@@ -4,13 +4,13 @@ MAINTAINER romeOz <serggalka@gmail.com>
 ENV PHP_CONF_DIR=/etc/php/7.0
 
 RUN \
-    VERSION_PECL_COUCHBASE="2.2.0beta3" && BUILD_DEPS='php7.0-dev wget' \
+    BUILD_DEPS='php7.0-dev wget' \
     && apt-get update \
     && apt-get install -y ${BUILD_DEPS} \
     && echo "deb http://packages.couchbase.com/ubuntu trusty trusty/main" | tee -a /etc/apt/sources.list.d/couchbase.list \
     && wget -O- http://packages.couchbase.com/ubuntu/couchbase.key | apt-key add - \
     && apt-get update \
-    && apt-get install -y libcouchbase2-libevent libcouchbase-dev php-xdebug php-apcu php-redis php-memcache php-memcached php-mongodb php7.0-bcmath \
+    && apt-get install -y zlib1g-dev libcouchbase2-libevent libcouchbase-dev php-xdebug php-apcu php-redis php-memcache php-memcached php-mongodb php7.0-bcmath \
     && echo "apc.enable_cli=1" >> ${PHP_CONF_DIR}/mods-available/apcu.ini \
     && pecl channel-update pecl.php.net \
     # Install couchbase

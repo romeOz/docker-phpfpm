@@ -4,7 +4,7 @@ MAINTAINER romeOz <serggalka@gmail.com>
 ENV PHP_CONF_DIR=/etc/php/5.5
 
 RUN \
-    VERSION_PECL_COUCHBASE="2.1.0" && BUILD_DEPS='php5.5-dev wget' \
+    BUILD_DEPS='php5.5-dev wget' \
     && apt-get update \
     && apt-get install -y ${BUILD_DEPS} \
     && echo "deb http://packages.couchbase.com/ubuntu trusty trusty/main" | tee -a /etc/apt/sources.list.d/couchbase.list \
@@ -18,7 +18,7 @@ RUN \
     && pecl install -f pcs \
     && echo "extension = pcs.so" >> ${PHP_CONF_DIR}/fpm/conf.d/pcs.ini \
     && echo "extension = pcs.so" >> ${PHP_CONF_DIR}/cli/conf.d/pcs.ini \
-    && pecl install -f couchbase \
+    && pecl install -f couchbase-2.3.4 \
     && echo "extension = couchbase.so" >> ${PHP_CONF_DIR}/fpm/conf.d/couchbase.ini \
     && echo "extension = couchbase.so" >> ${PHP_CONF_DIR}/cli/conf.d/couchbase.ini \
     # Install APC
