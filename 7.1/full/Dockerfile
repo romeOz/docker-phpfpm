@@ -42,7 +42,7 @@ RUN \
 
     # Install PHPUnit
     && echo "\nInstall PHPUnit\n" \
-    && composer global require "phpunit/phpunit:^7.0.0" \
+    && composer global require "phpunit/phpunit:^6.0.0" \
     && echo -e '\ninclude_path = ".:/usr/share/php:/root/.composer/vendor/phpunit"' >> ${PHP_CONF_DIR}/cli/conf.d/custom.ini \
     && ln -s /root/.composer/vendor/bin/phpunit /usr/bin/phpunit \
 
