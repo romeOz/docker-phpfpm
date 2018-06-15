@@ -1,12 +1,12 @@
 FROM ubuntu:xenial
 MAINTAINER romeOz <serggalka@gmail.com>
 
-ENV OS_LOCALE="en_US.UTF-8"
+ENV OS_LOCALE="en_US.UTF-8" \
+    DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y locales && locale-gen ${OS_LOCALE}
 ENV LANG=${OS_LOCALE} \
     LANGUAGE=${OS_LOCALE} \
-    LC_ALL=${OS_LOCALE} \
-    DEBIAN_FRONTEND=noninteractive
+    LC_ALL=${OS_LOCALE}
 
 ENV PHP_RUN_DIR=/run/php \
     PHP_LOG_DIR=/var/log/php \
