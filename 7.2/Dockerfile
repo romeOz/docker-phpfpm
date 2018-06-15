@@ -24,7 +24,7 @@ RUN \
     # php7.2-mcrypt not support and move to PECL. Use extension Sodium: http://php.net/manual/book.sodium.php
     && apt-get install -y curl php7.2-fpm php7.2-cli php7.2-readline php7.2-mbstring php7.2-zip php7.2-intl php7.2-json php7.2-xml php7.2-curl php7.2-gd php7.2-pgsql php7.2-mysql php-pear \
     # Install composer
-    && curl -sS https://getcomposer.org/installer | php -- --version=1.6.4 --install-dir=/usr/local/bin --filename=composer \
+    && curl -sS https://getcomposer.org/installer | php -- --version=1.6.5 --install-dir=/usr/local/bin --filename=composer \
     && mkdir -p ${PHP_LOG_DIR} ${PHP_RUN_DIR} \
     # Cleaning
     && apt-get purge -y --auto-remove $BUILD_DEPS \
