@@ -16,10 +16,10 @@ RUN \
     && wget -O- http://packages.couchbase.com/ubuntu/couchbase.key | apt-key add - \
     && apt-get update \
     && apt-get install -y zlib1g-dev libcouchbase2-libevent libcouchbase-dev re2c \
-    && pecl install -f pcs \
-    && echo "extension = pcs.so" >> ${PHP_CONF_DIR}/mods-available/pcs.ini \
-    && ln -s ${PHP_CONF_DIR}/mods-available/pcs.ini ${PHP_CONF_DIR}/fpm/conf.d/pcs.ini \
-    && ln -s ${PHP_CONF_DIR}/mods-available/pcs.ini ${PHP_CONF_DIR}/cli/conf.d/pcs.ini \
+#    && pecl install -f pcs \
+#    && echo "extension = pcs.so" >> ${PHP_CONF_DIR}/mods-available/pcs.ini \
+#    && ln -s ${PHP_CONF_DIR}/mods-available/pcs.ini ${PHP_CONF_DIR}/fpm/conf.d/pcs.ini \
+#    && ln -s ${PHP_CONF_DIR}/mods-available/pcs.ini ${PHP_CONF_DIR}/cli/conf.d/pcs.ini \
     && pecl install -f couchbase-2.6.0 \
     && echo "extension = couchbase.so" >> ${PHP_CONF_DIR}/mods-available/couchbase.ini \
     && ln -s ${PHP_CONF_DIR}/mods-available/couchbase.ini ${PHP_CONF_DIR}/fpm/conf.d/couchbase.ini \
