@@ -2,6 +2,21 @@
 
 set -e
 
+echo "-- Building PHP 7.3 image"
+docker build -t php-7.3 7.3/
+
+echo
+echo "-- Testing server is running"
+docker run --name app -d php-7.3; sleep 5
+docker exec -it app bash -c 'echo "echo 2;" | php -a | grep -wc 2'
+docker exec -it app bash -c "php -v | grep -c 'PHP 7.3'"
+
+echo
+echo "-- Clear"
+docker rm -f -v app; sleep 5
+docker rmi -f php-7.3
+
+
 echo "-- Building PHP 7.2 image"
 docker build -t php-7.2 7.2/
 

@@ -19,7 +19,7 @@ Installation
 docker pull romeoz/docker-phpfpm
 ```
 
-or other versions (7.2, 7.1, 7.0, 5.6, 5.5, 5.4 or 5.3):
+or other versions (7.3, 7.2, 7.1, 7.0, 5.6, 5.5, 5.4 or 5.3):
 
 ```bash
 docker pull romeoz/docker-phpfpm:5.5
@@ -126,8 +126,8 @@ Create the file `/etc/logrotate.d/docker-containers` with the following text ins
 
 Out of the box
 -------------------
- * Ubuntu 12.04, 14.04 or 16.04 LTS
- * PHP 5.3, 5.4, 5.5, 5.6, 7.0, 7.1 or 7.2
+ * Ubuntu 12.04, 14.04, 16.04 or 18.04 LTS
+ * PHP 5.3, 5.4, 5.5, 5.6, 7.0, 7.1, 7.2 or 7.3
  * Composer (package manager)
 
 >Environment depends on the version of PHP.
