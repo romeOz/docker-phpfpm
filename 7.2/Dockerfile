@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:bionic
 MAINTAINER romeOz <serggalka@gmail.com>
 
 ENV OS_LOCALE="en_US.UTF-8" \
@@ -14,7 +14,7 @@ ENV PHP_RUN_DIR=/run/php \
     PHP_DATA_DIR=/var/lib/php
 
 RUN \
-    BUILD_DEPS='software-properties-common python-software-properties' \
+    BUILD_DEPS='software-properties-common' \
     && dpkg-reconfigure locales \
     # Install common libraries
     && apt-get install --no-install-recommends -y $BUILD_DEPS \

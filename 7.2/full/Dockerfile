@@ -12,7 +12,7 @@ RUN \
 
     # Install couchbase
     && echo "\nInstall couchbase extension\n" \
-    && echo "deb http://packages.couchbase.com/ubuntu xenial xenial/main" | tee -a /etc/apt/sources.list.d/couchbase.list \
+    && echo "deb http://packages.couchbase.com/ubuntu bionic bionic/main" | tee /etc/apt/sources.list.d/couchbase.list \
     && wget -O- http://packages.couchbase.com/ubuntu/couchbase.key | apt-key add - \
     && apt-get update \
     && apt-get install -y zlib1g-dev libcouchbase2-libevent libcouchbase-dev re2c \
