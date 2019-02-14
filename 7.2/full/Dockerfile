@@ -20,14 +20,14 @@ RUN \
     && echo "extension = pcs.so" >> ${PHP_CONF_DIR}/mods-available/pcs.ini \
     && ln -s ${PHP_CONF_DIR}/mods-available/pcs.ini ${PHP_CONF_DIR}/fpm/conf.d/pcs.ini \
     && ln -s ${PHP_CONF_DIR}/mods-available/pcs.ini ${PHP_CONF_DIR}/cli/conf.d/pcs.ini \
-    && pecl install -f couchbase-2.4.6 \
+    && pecl install -f couchbase-2.6.0 \
     && echo "extension = couchbase.so" >> ${PHP_CONF_DIR}/mods-available/couchbase.ini \
     && ln -s ${PHP_CONF_DIR}/mods-available/couchbase.ini ${PHP_CONF_DIR}/fpm/conf.d/couchbase.ini \
     && ln -s ${PHP_CONF_DIR}/mods-available/couchbase.ini ${PHP_CONF_DIR}/cli/conf.d/couchbase.ini \
 
     # Install Redis
     && echo "\nInstall redis extension\n" \
-    && printf "\n" | pecl install -f redis-4.0.2 \
+    && printf "\n" | pecl install -f redis-4.2.0 \
     && echo "extension = redis.so" >> ${PHP_CONF_DIR}/mods-available/redis.ini \
     && ln -s ${PHP_CONF_DIR}/mods-available/redis.ini ${PHP_CONF_DIR}/fpm/conf.d/redis.ini \
     && ln -s ${PHP_CONF_DIR}/mods-available/redis.ini ${PHP_CONF_DIR}/cli/conf.d/redis.ini \
