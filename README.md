@@ -22,7 +22,7 @@ docker pull romeoz/docker-phpfpm
 or other versions (7.3, 7.2, 7.1, 7.0, 5.6, 5.5, 5.4 or 5.3):
 
 ```bash
-docker pull romeoz/docker-phpfpm:5.5
+docker pull romeoz/docker-phpfpm:7.1
 ```
 
 Alternately you can build the image yourself.
