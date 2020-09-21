@@ -5,7 +5,7 @@ ENV PHP_CONF_DIR=/etc/php/7.2
 
 RUN \
     BUILD_DEPS='php7.2-dev wget' \
-    && apt-get update \
+    && apt-get update --fix-missing \
     && apt-get install -y ${BUILD_DEPS} php-xdebug php-apcu php-memcache php-memcached php-mongodb php7.2-bcmath \
     && echo "apc.enable_cli=1" >> ${PHP_CONF_DIR}/mods-available/apcu.ini \
     && pecl channel-update pecl.php.net \
