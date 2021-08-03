@@ -1,5 +1,5 @@
 FROM ubuntu:trusty
-LABEL maintainer romeOz <serggalka@gmail.com>
+LABEL maintainer jakemonton <jakermonton@gmail.com>
 
 ENV OS_LOCALE="en_US.UTF-8" \
     DEBIAN_FRONTEND=noninteractive
