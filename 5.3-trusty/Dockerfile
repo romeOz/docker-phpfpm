@@ -1,5 +1,5 @@
-FROM ubuntu:precise
-MAINTAINER romeOz <serggalka@gmail.com>
+FROM ubuntu:trusty
+LABEL maintainer jakemonton <jakermonton@gmail.com>
 
 ENV OS_LOCALE="en_US.UTF-8" \
     DEBIAN_FRONTEND=noninteractive
@@ -14,12 +14,14 @@ ENV PHP_RUN_DIR=/run/php \
     PHP_DATA_DIR=/var/lib/php5
 
 RUN \
-    BUILD_DEPS='software-properties-common python-software-properties' \
+    BUILD_DEPS='software-properties-common' \
     && apt-get update \
     # Install common libraries
     && apt-get install --no-install-recommends -y $BUILD_DEPS \
     # Note: PHP 5.3.29 Trusty ppa:hentenaar/php
-    && add-apt-repository ppa:rip84/php5 \
+    && add-apt-repository ppa:hentenaar/php \
+    # Note: PHP 5.3.29 Precise ppa:rip84/php
+    # && add-apt-repository ppa:rip84/php5 \
     && apt-get update \
     # Install PHP libraries
     && apt-get install -y curl php5-fpm php5-cli php-apc php5-intl php5-json php5-curl php5-mcrypt php5-gd php5-pgsql php5-mysql php-pear \
